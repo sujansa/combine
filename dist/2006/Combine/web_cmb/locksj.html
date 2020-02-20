@@ -1,0 +1,82 @@
+<title>Locksj - User manual(Incomplete) 16 FEB 2006   &copy; Sujan S. A.</title>
+<body  bgcolor="#000000"><div align="">
+<A HREF="http://www.geocities.com/messagesujan/index.htm">
+<FONT SIZE="4" COLOR="#66FF99"> Home |<FONT></A>
+<A HREF="..\combine.html">
+<FONT SIZE="4" COLOR="#66FF99"> Combine |<FONT></A>
+<A HREF="locksj.html">
+<FONT SIZE="4" COLOR="#FFFFFF"> Locksj |<FONT></A>
+<A HREF="http://www.google.co.in">
+<FONT SIZE="4" COLOR="#66FF99"> Search  <FONT></A>
+<img src="ani.gif" border="0" alt="" align="right">
+<h1><center><font size="14" color="#FF66CC">Locksj</font></center></h1>
+<font size="4" color="#FFFFCC"><br><p>Locksj is a simple encryption program with which you can
+encrypt files and folders on hard drives or floppy drives.  The current version uses a fairly
+vigorous encryption method which is reliable enough. Don't forget to check for upgrades, 
+that may include more vigorous encryption techniques.  Before you start using Locksj 
+you must know a bit atleast, about how to use this little monster and the monsterous trouble 
+it can put you and your computer into, when it is used improperly or thoughtlessly.  
+<br><br><b><font size="5" color="#0099FF">The Locksj Key</font></b><br>Locksj scrambles files using a key(password) given by the user.  
+Locksj intends to encrypt files in such a way that no software including, Locksj 
+itself, can decrypt the encrypted files without the right key. This means if
+you forget the key Locksj is not going to do you any help.  The key, in addition to
+to being the key for locking/unlocking files, also conveys certain information to Locksj
+about whether to scramble hiden files also, and whether to scramble the entire file
+or only a part of it.  You must therefore frame keys(passwords) keeping mind the following
+rules.</p>
+<ul>
+	<li>The first character of the key must be a letter of the alphabet (a..z).
+	This letter determines the number of bytes from the begining of the file that
+	will be scrambled (length of scrambling).  If the first letter of the key is 'a' then the first
+	16 bytes of each of the files will be scrambled, if it is 'b' instead then the 
+	number of bytes that will be scrambled will be twice of that of 'a' that is
+	32 bytes, and twice of this when 'c' is the first character in the key and
+	so on.  <br><br>
+	<li>This should be followed by a number not exceeding ten digits in length.<br><br>
+	<li>If the first digit of the number i.e., the second character of the key
+	is 0 (zero) then even hiden files will be encypted.<br><br>
+</ul>
+<p>As mentioned above Locksj can scramble a part of the file with the size of this 
+part being a power of 2 with 16 bytes (for 'a') being the minimum size and 1 gigabyte
+(for 'z') being the maximum size.  However files involved in the scrambling process
+can be of any size; there is no restriction on the size of the files being scrambled.
+</p><b><font size="5" color="#0099FF">System Requirements</font></b><br>
+<p>When using Locksj you must make sure there is enough space on the disk
+for the temporay files that Locksj may create. The minimum space required depends
+on the length of scramble (specified by the first character of the key),
+the size of the largest file being scrambled and the total number of files being
+scrambled.<br>
+The memory requirement depends on the total number of files being scrambled.
+However when Locksj is run in DOS shell of Windows&copy; (as you would be doing probably)practically there
+would be no problem in the functioning of Locksj even for very large number of files.<br>
+<br><font size="5" color="#0099FF"><b>Possible dangers of using Locksj</b></font><br>
+The current version of locksj does not include the auto-restore feature and so
+files that become corrupt in any event of failures may be lost forever.  It recommended that 
+you don't encrypt very important files for which you don't have backups. Failures may occur 
+when access to a file that is to be encrypted is denied. Make sure there are no such files
+among the files that you want to encrypt. If there are such files you can make Locksj
+skip such files by making them hiden. In this situation you must not be encrypting hiden files.
+<br><br><font size="5" color="#0099FF"><b><i>Modus operandi</i> of usage</b></font>
+<ul>
+	<li>Double click on the locksj.exe file icon.
+	<li>Specify the complete(absolute) path of the folder where you would like
+	locksj to create temporary files. Path should always end in '\', for example c:\anand_temp\ is a valid path.
+    <li>Specify the complete(absolute) path of the folder which you want to lock/unlock.
+    <li>Enter a key satisfying the key framing rules. for example m123 
+    is a valid key which indicates that the scramble-length is 4 Kbytes ( m = 2^12)
+    and hiden files should not be scrambled (the second character of the key
+    is ( ='1') not '0').
+    <li>Standby and respond to the messages that Locksj might throw on the screen.
+    <li>A list of files processed is displayed as each file is processed.
+</ul></p></font>
+<center><img src="lockshot.png" border="0" alt=""></center>
+<BR><BR><BR><HR><BR><BR>
+<CENTER><P><FONT SIZE="3" COLOR="#FFFFFF">
+This page is a part of the Locksj Data Security Package documentation.
+Last revised on 22 June 2006, &copy; Sujan S. A.<BR>
+Information in this document, including URL and other Internet Web site references, 
+is subject to change without notice. The names of actual companies and products
+mentioned herein may be the trademarks of their respective owners.
+Complying with all applicable copyright laws is the responsibility of the user.
+</FONT></P></CENTER>
+</body>
