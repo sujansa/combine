@@ -1,3 +1,4 @@
+
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 ///////////////////////////////Combine///////////////////////////////
@@ -5,28 +6,28 @@
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
-// Name        : Combine  Ver: Pad 24                            //
-// Written by  : Sujan S. A.                                      //
-// E-mail      : messagesujan@yahoo.co.in                        //
-// Description  : Graphic editor                                  //
+// Name         : Combine  Ver: Pad 24                             //
+// Written by   : Sujan S. A.                                      //
+// E-mail       : messagesujan@yahoo.co.in                         //
+// Description  : Graphic editor                                   //
 // Last revised : 15 JUN 2006 (23:32 hrs)                          //
 /////////////////////////////////////////////////////////////////////
 
-/*If  sys\stat.h  is not available then
+/*If   sys\stat.h   is not available then
     #define S_IWRITE 128
     #define S_IREAD 256
 */
 
 #include <iostream.h>
 #include <stdio.h>          //sprintf(), fopen() ...
-#include <string.h>        //strcpy() ...
+#include <string.h>         //strcpy() ...
 #include <ctype.h>          //toupper()
-#include <math.h>          //atan() ...
-#include <stdlib.h>        //system()
+#include <math.h>           //atan() ...
+#include <stdlib.h>         //system()
 #include <dos.h>            //delay()
 #include <fcntl.h>          //O_CREAT, O_TRUNC,...
-#include <io.h>            //open(), lseek(), read(), write(), ...
-#include <sys\stat.h>      //S_IWRITE, S_IREAD
+#include <io.h>             //open(), lseek(), read(), write(), ...
+#include <sys\stat.h>       //S_IWRITE, S_IREAD
 #include <conio.h>          //getch(), kbhit()
 #include <alloc.h>          //farmalloc(), farfree()
 #include <errno.h>          //errno ...
@@ -36,22 +37,22 @@
 #define R2D 180.0/3.1415926535
 
 #define IMG_PATH "C:\\img_cmb"          //Image buffer
-#define SINK_PATH "C:\\cmb.tsj"        //Temporary file
+#define SINK_PATH "C:\\cmb.tsj"         //Temporary file
 #define RES_PATH "Combine.rsj"          //The resource file
 #define DFL_PATH "dfl_cmb"              //Default file for opening
-#define DRIVER_PATH "GDriver"          //Graphics device driver
+#define DRIVER_PATH "GDriver"           //Graphics device driver
 #define LOGOSCR_PATH "logoscr.exe"      //Welcome screen
 #define BSJ_JUN_2006 1                  //Image file version
 
-#define DEAD 0        //Status(buttons)
+#define DEAD 0         //Status(buttons)
 #define ALIVE 1
 #define ACTIVE 2
 
-#define LINE 1        //Primitives
+#define LINE 1         //Primitives
 #define CIRCLE 2
 #define BEZIER 3
 
-#define PENCIL 1      //Operations
+#define PENCIL 1       //Operations
 #define AIRBRUSH 2
 #define FLOOD 3
 #define ERASER 4
@@ -66,13 +67,13 @@
 #define BTEXT 13
 
 
-#define TEMP 254    //Special colours (must be refined when
+#define TEMP 254     //Special colours (must be refined when
 #define ERASE 255    //using 256 or more colours)
 
 #define BACKSPACE 8  //ASCII codes
 #define ESC_KEY 27
 
-#define UpArrow 72  //Extended key codes
+#define UpArrow 72   //Extended key codes
 #define DownArrow 80
 #define RightArrow 77
 #define LeftArrow 75
@@ -82,14 +83,14 @@ typedef unsigned short DPixel; //Double pixel
 
 ////ImageInfo structure//////////////////////////////////////////////
 typedef struct {
-    char type[4];  //Default :  B S J (version)
+    char type[4];   //Default :  B S J (version)
     short wcsizex;  //Horizontal image size
     short wcsizey;  //vertical image size
 } ImageInfo;
 
 ////Segment structure////////////////////////////////////////////////
 typedef struct {
-    int type;      //Type of primitive
+    int type;       //Type of primitive
     int a, b, c, d; //Coordinates
 } Segment;
 
@@ -242,10 +243,10 @@ public:
 
 ////Global Data//////////////////////////////////////////////////////
 
-int Maxx, Maxy;        //Screen size
-int res_fd;            //The resource file
-void far *ptr[4];      //Store screen
-int xnext=0, ynext=0;  //Next text output coordinates
+int Maxx, Maxy;         //Screen size
+int res_fd;             //The resource file
+void far *ptr[4];       //Store screen
+int xnext=0, ynext=0;   //Next text output coordinates
 
 Mouse mouse;
 Pad pd;
@@ -307,7 +308,7 @@ int MaxOf(int a, int b) {
 //Writes text at (x, y) in the default font.
 void WriteText( const char *str, int x=-1, int y=-1,
     int tfgc=BLACK, int tbgc=LIGHTGRAY) {
-    int len; 
+    int len;   
     setcolor(tfgc);
     len=strlen(str);
     setfillstyle(SOLID_FILL,tbgc);
@@ -338,7 +339,7 @@ inline void WritePixel(int x, int y, int value) {
         mov cx, x
         mov dx, y
         int 0x10
-    }  */
+    }   */
 }
 
 inline int ReadPixel(int x, int y) {
@@ -362,11 +363,11 @@ int InitializeGraphics() {
     initgraph(&gdriver, &gmode, DRIVER_PATH);
     /* read result of initialization */
     errorcode = graphresult();
-    if (errorcode != grOk) {  /* an error occurred */
+    if (errorcode != grOk) {   /* an error occurred */
         printf("Graphics error: %s\n", grapherrormsg(errorcode));
         printf("Press any key to halt:");
         WaitKey();
-        exit(1);              /* terminate with an error code */
+        exit(1);               /* terminate with an error code */
     }
     Maxx=getmaxx();
     Maxy=getmaxy();
@@ -496,11 +497,11 @@ void showhelp() {
     bar(0, 20, Maxx, Maxy);
 
     WriteText(
-" Combine  Graphic Editor    developed by Sujan S. A. and R. Srikanth",
+" Combine   Graphic Editor     developed by Sujan S. A. and R. Srikanth",
     5, 25);
-    WriteText(" Feedback:  messagesujan@yahoo.co.in      ");
+    WriteText(" Feedback:   messagesujan@yahoo.co.in       ");
     WriteText("=====================================================");
-    WriteText("<Help>    Press Escape to return to Combine editor.");
+    WriteText("<Help>     Press Escape to return to Combine editor.");
     WriteText("                                                    ");
     WriteText(
 "Combine is a drawing tool you can use to create simple or elaborate ");
@@ -633,8 +634,8 @@ void Pad::SetImageInfo(int sx, int sy, int value) {
 }
 
 int Pad::GetImageInfo() {
-  lseek(img, 0L, SEEK_SET);
-  read(img, &attr, sizeof(ImageInfo));
+   lseek(img, 0L, SEEK_SET);
+   read(img, &attr, sizeof(ImageInfo));
     if(vpsizex>attr.wcsizex)
         vpsizex=attr.wcsizex;
     if(vpsizey>attr.wcsizey)
@@ -644,7 +645,7 @@ int Pad::GetImageInfo() {
     wcendx=wcstartx+vpsizex; wcendy=wcstarty+vpsizey;
     xmin=0; ymin=0; xmax=attr.wcsizex-1; ymax=attr.wcsizey-1;
     if(attr.type[0]!='B'||attr.type[1]!='S'||attr.type[2]!='J')
-      return -2;
+       return -2;
     else if(attr.type[3]!=BSJ_JUN_2006)
         return -3;
     return 0;
@@ -696,8 +697,8 @@ int Pad::save(char *fname) {
     char ch;
     DPixel pix;
     if((item=fopen(fname, "w+b"))==NULL) {
-      Beep();
-      return -1;
+       Beep();
+       return -1;
     }
     isize=(long)attr.wcsizex*attr.wcsizey;
     fwrite(&attr, sizeof(ImageInfo), 1, item);
@@ -746,12 +747,12 @@ void Pad::show(int flag) {
 
 //
 void Pad::ScrnCapture() {
-    int i, j;
+	int i, j;
   DPixel ch;
   mouse.hide();
   for(i=0; i<vpsizey; i++){
     for(j=0; j<vpsizex; j++) {
-        ch=ReadPixel(vpstartx+j, vpstarty+i);
+    	ch=ReadPixel(vpstartx+j, vpstarty+i);
       setpix(wcstartx+j, wcstarty+i, ch);
     }
   }
@@ -1072,7 +1073,7 @@ void Pad::ffill(int x, int y) {
     head->x=x;
     head->y=y;
     head->next=NULL;
-//    count=0;    WarnValue=1;
+//    count=0;     WarnValue=1;
     while(head!=NULL) {
         setpix(x,y, fgc);
         if((0x00ff & getpix(x,y-1))==backColor){
@@ -1219,9 +1220,9 @@ fb.Msg("<Eraser> Hold and drag to paint the selected colour.");
                 if(!getxy(x0, y0)) return 0;
                 fb.Update(x0, y0);
             }
-              mouse.hide();
-              ffill(x0, y0);
-              mouse.show();
+               mouse.hide();
+               ffill(x0, y0);
+               mouse.show();
             break;
         case DRAWLINE:
             fb.Msg(
@@ -1568,25 +1569,25 @@ fb.Msg("<Eraser> Hold and drag to paint the selected colour.");
 
 //Displays fullscreen preview of the image file.
 void Pad::preview() {
-  int vpsizex1, vpsizey1, vpstartx1, vpstarty1, vpendx1, vpendy1;
-  vpsizex1=vpsizex;
-  vpsizey1=vpsizey;
-  vpstartx1=vpstartx;
-  vpstarty1=vpstarty;
-  vpendx1=vpendx;
-  vpendy1=vpendy;
-  pd.position(0, 0);
-  pd.resize(MinOf(Maxx, attr.wcsizex), MinOf(Maxy, attr.wcsizey));
-  setfillstyle(XHATCH_FILL, LIGHTGRAY);
-  bar(0, 0, Maxx, Maxy);
-  pd.show();
-  pd.resize(vpsizex1, vpsizey1);
-  vpsizex=vpsizex1;
-  vpsizey=vpsizey1;
-  vpstartx=vpstartx1;
-  vpstarty=vpstarty1;
-  vpendx=vpendx1;
-  vpendy=vpendy1;
+   int vpsizex1, vpsizey1, vpstartx1, vpstarty1, vpendx1, vpendy1;
+   vpsizex1=vpsizex;
+   vpsizey1=vpsizey;
+   vpstartx1=vpstartx;
+   vpstarty1=vpstarty;
+   vpendx1=vpendx;
+   vpendy1=vpendy;
+   pd.position(0, 0);
+   pd.resize(MinOf(Maxx, attr.wcsizex), MinOf(Maxy, attr.wcsizey));
+   setfillstyle(XHATCH_FILL, LIGHTGRAY);
+   bar(0, 0, Maxx, Maxy);
+   pd.show();
+   pd.resize(vpsizex1, vpsizey1);
+   vpsizex=vpsizex1;
+   vpsizey=vpsizey1;
+   vpstartx=vpstartx1;
+   vpstarty=vpstarty1;
+   vpendx=vpendx1;
+   vpendy=vpendy1;
 }
 
 //Creates a new pad of dimension (sx, sy).
@@ -1602,7 +1603,7 @@ void Pad::new_Pad(int sx, int sy) {
         pix=0x0f0f;
         lseek(img, sizeof(ImageInfo)+640*480*sizeof(DPixel), SEEK_SET);
         for(i=640*480; i<isize; i++)
-          write(img, &pix, sizeof(DPixel));
+           write(img, &pix, sizeof(DPixel));
         position(101, 22);
         resize(Maxx-119, Maxy-60);
         strcpy(curfile, "\0");
@@ -1637,7 +1638,7 @@ int Pad::user_open() {
         Beep();
         WaitKey();
     }
-    return -1;     
+    return -1;       
 }
 
 //Allows a user to save image.
@@ -1974,7 +1975,7 @@ void FeedBack::Msg(char *msg) {
         return;
     strcpy(msgstr, msg);
     WriteText(
-"                                                                              ",
+"                                                                               ",
     5, Maxy-20);
     WriteText(msgstr, 5, Maxy-20);
 }
@@ -2012,7 +2013,7 @@ int FeedBack::Update(int x, int y) {
         return 0;
     x0=x; y0=y;
     if(x==-1) {
-        WriteText("        ",Maxx-80, Maxy-10);
+        WriteText("         ",Maxx-80, Maxy-10);
         return 0;
         }
     sprintf(loc_str, " %d,%d \0", x, y);
@@ -2085,7 +2086,7 @@ void session(char *fname=NULL) {
     setfillstyle(SOLID_FILL, LIGHTGRAY);
     bar(0, 0, Maxx, Maxy);
     fb.Msg(
-" Combine (c) Sujan S. A. & R. Srikanth      Initializing.  Please wait...");
+" Combine (c) Sujan S. A. & R. Srikanth       Initializing.   Please wait...");
     if(fname==NULL) pd.load(DFL_PATH);
     else {
         pd.load(fname);
@@ -2179,7 +2180,7 @@ void session(char *fname=NULL) {
     thick2_button.setalive();
     thick3_button.setalive();
     fb.Msg(
-" Combine  (c) Sujan S. A. & R. Srikanth      Initializing.  Please wait...");
+" Combine  (c) Sujan S. A. & R. Srikanth      Initializing.   Please wait...");
     pd.setstate(DRAWLINE);
     fb.LineStatus();
     cb.init(10, 330, 80, 75);
@@ -2188,7 +2189,7 @@ void session(char *fname=NULL) {
     mouse.show();
 
     while(1) {
-  LABEL1: fb.Update(-1,-1);
+   LABEL1: fb.Update(-1,-1);
         mouse.read();
         if(pd.test()) {
             pd.perform();
@@ -2196,7 +2197,7 @@ void session(char *fname=NULL) {
             if(close_button.select()) {
                 pd.imgclose();
                 fb.Msg(
-"Closing Combine OK.  Thank you.    Press any key.");
+"Closing Combine OK.   Thank you.    Press any key.");
                 //WaitKey();
                 CloseGraphics();
                 exit(0);
@@ -2204,13 +2205,13 @@ void session(char *fname=NULL) {
         } else if(new_button.test()) {
             if(new_button.select()) {
                 do{
-                    x=640; y=480;
+                     x=640; y=480;
                     fb.Msg(
                     "<New> Image size : 640x480 pixel ? (y/n)");
                     if(tolower(WaitKey())=='n') {
                         fb.Msg(
                     "<New> Enter horizontal image size(in pixels):");
-                        if(fb.GetInput(str)==0) goto LABEL1    ;
+                        if(fb.GetInput(str)==0) goto LABEL1	;
                         x=atoi(str);
                         fb.Msg(
                     "<New> Enter vertical image size(in pixels):");
@@ -2360,7 +2361,7 @@ void session(char *fname=NULL) {
 }
 
 ////C main() function////////////////////////////////////////////////
-void main(int argc, char *argv[]) {
+void main(int argc, char *argv[]) { 
     if(argc>1) session(argv[1]);
     else {
         if(system(LOGOSCR_PATH)<0) Beep();
